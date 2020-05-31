@@ -29,7 +29,7 @@ class AddTodo extends Component {
         />
         <input
           type="submit"
-          value="Submit"
+          value="add"
           className="btn"
           style={{ flex: "3" }}
         />

@@ -12,7 +12,7 @@ class App extends Component {
 
   componentDidMount() {
     axios
-      .get("https://jsonplaceholder.typicode.com/todos?_limit=10")
+      .get("http://localhost:3000/posts")
       .then(res => this.setState({ todos: res.data }));
   }
 
@@ -30,7 +30,7 @@ class App extends Component {
 
   // Delete Todo
   delTodo = id => {
-    axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`).then(res =>
+    axios.delete(`http://localhost:3000/posts/${id}`).then(res =>
       this.setState({
         todos: this.state.todos.filter(todo => todo.id !== id)
       })
@@ -40,7 +40,7 @@ class App extends Component {
   // Add Todo
   addTodo = title => {
     axios
-      .post("https://jsonplaceholder.typicode.com/todos", {
+      .post("http://localhost:3000/posts", {
         title,
         completed: false
       })
@@ -56,14 +56,20 @@ class App extends Component {
         <div className="App">
           <div className="container">
 
-
-            <AddTodo addTodo={this.addTodo} />
-            <Todos
-              todos={this.state.todos}
-              markComplete={this.markComplete}
-              delTodo={this.delTodo}
+            <Route
+              exact
+              path="/"
+              render={props => (
+                <React.Fragment>
+                  <AddTodo addTodo={this.addTodo} />
+                  <Todos
+                    todos={this.state.todos}
+                    markComplete={this.markComplete}
+                    delTodo={this.delTodo}
+                  />
+                </React.Fragment>
+              )}
             />
-
 
 
           </div>
